@@ -83,7 +83,9 @@ function renderDrug(url) {
         document.getElementById('license').innerHTML = `<span>License: </span>${data.license}`;
         const composition = data.description.composition.split('\n');
         if (composition.length >= 2) {
-            const [main, help] = composition;
+            // const [main, help] = composition;
+            const main = composition[0];
+            const help = composition.slice(1).join('\n');
             document.getElementById('active_component').innerHTML = `<span>Main component: </span>${
                 main}`;
             document.getElementById('help_components').innerHTML = `<span>Helper components</span>${

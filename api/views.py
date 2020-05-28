@@ -1,4 +1,7 @@
+from braces.views import CsrfExemptMixin
+
 from pharmacy.models import Drug, Pharmacy
+from django.contrib.auth.models import User
 from .serializers import DrugSerializer, PharmacySerializer, DrugSearchSerializer, DrugPharmacySearchSerializer,\
     DrugPharmacy
 from rest_framework.response import Response
@@ -50,3 +53,17 @@ class PharmacySearchView(APIView):
         else:
             return Response({'Error': 'NOT_FOUND'})
 
+
+class RegisterView(CsrfExemptMixin, APIView):
+    @staticmethod
+    def post(request):
+        username = request.POST['username']
+        password = request.POST['password']
+        email = request.POST['email']
+        if User.objects.filter(email=email).exists():
+            return Response({'response': 'EMAIL_TAKEN'})
+        if User.objects.filter(username=username).exists():
+            return Response({'response': 'USERNAME_TAKEN'})
+
+        User.objects.create_user(username=username, password=password, email=email).save()
+        return Response({'response': 'OK'})

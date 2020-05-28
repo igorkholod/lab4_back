@@ -125,11 +125,15 @@ nav .search-container input[type=text] {
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
-.welcome-container form button:before {
-  content: "";
-  font-family: FontAwesome;
-  font-size: 16px;
+/*.welcome-container form button:before {*/
+/*  font-family: FontAwesome, serif;*/
+/*  font-size: 16px;*/
+/*  color: #F9F0DA;*/
+/*}*/
+
+.fa-search {
   color: #F9F0DA;
+  font-size: 16px;
 }
 
 .drug-pharmacy-main-info {
